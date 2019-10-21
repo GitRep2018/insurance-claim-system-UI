@@ -25,9 +25,30 @@
         <td style="width:25%">{{approve.claimDate }}</td>
         <td style="width:25%">{{approve.insuranceNumber}}</td>
         <td style="width:25%">
-          <button class="btn btn-success btn-sm mr-1" icon="pi pi-check" (click)="approve()">Approve</button>
+          <button class="btn btn-success btn-sm mr-1" icon="pi pi-check" (click)="openPopUp()">Approve</button>
           <button class="btn btn-danger btn-sm" icon="pi pi-times" (click)="cancel()">Reject</button>
         </td>
+        <p-dialog header="Approve" [(visible)]="display" [modal]="true" [style]="{width: '350px', minWidth: '200px'}"
+          [minY]="70" [maximizable]="true" [baseZIndex]="10000">
+          <b>Comments </b> <input type="text" pInputText [(ngModel)]="comments" size="41" />
+          <p-footer>
+            <button type="button" pButton icon="pi pi-check" (click)="approves(approve.claimId,comments)"
+              label="Approve"></button>
+            {{approve.claimId}}
+            <button type="button" pButton icon="pi pi-times" (click)="display=false" label="Cancel"
+              class="ui-button-secondary"></button>
+          </p-footer>
+        </p-dialog>
+        <p-dialog header="Are you sure want to reject?" [(visible)]="display1" [modal]="true"
+          [style]="{width: '350px', minWidth: '200px'}" [minY]="70" [maximizable]="true" [baseZIndex]="10000">
+          <b>Reason for Rejection </b> <input type="text" pInputText [(ngModel)]="reason" size="41" />
+          <p-footer>
+            <button type="button" pButton icon="pi pi-check" (click)="reject(approve.claimId,reason)"
+              label="Reject"></button>
+            <button type="button" pButton icon="pi pi-times" (click)="display1=false" label="Cancel"
+              class="ui-button-secondary"></button>
+          </p-footer>
+        </p-dialog>
       </tr>
     </ng-template>
     <ng-template pTemplate="rowexpansion" let-rowData let-oe let-columns="columns">
@@ -82,12 +103,7 @@
     </ng-template>
   </p-table>
 </div>
-<p-dialog header="Are you sure want to reject?" [(visible)]="display" [modal]="true"
-  [style]="{width: '350px', minWidth: '200px'}" [minY]="70" [maximizable]="true" [baseZIndex]="10000">
-  <b>Comments </b> <input type="text" pInputText [(ngModel)]="comments" size="41" />
-  <p-footer>
-    <button type="button" pButton icon="pi pi-check" (click)="reject()" label="Reject"></button>
-    <button type="button" pButton icon="pi pi-times" (click)="display=false" label="Cancel"
-      class="ui-button-secondary"></button>
-  </p-footer>
-</p-dialog>
+
+
+
+<p-toast [style]="{marginTop: '80px'}" position="top-center"></p-toast>

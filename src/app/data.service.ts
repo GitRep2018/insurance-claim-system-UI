@@ -40,7 +40,7 @@ export class DataService {
       "email": email,
       "password": password,
     }
-    return this._http.post("http://13.233.128.233:9999/insurance-claim-system/login", userObj)
+    return this._http.post("http://10.117.189.90:9090/insurance-claim-system/login", userObj)
   }
 
   /**
@@ -57,7 +57,7 @@ export class DataService {
    * @param:user
    */
   claimYourInsure = (user: Users) => {
-    return this._http.post("http://13.233.128.233:9999/insurance-claim-system/api/claims", user);
+    return this._http.post("http://10.117.189.159:9090/insurance-claim-system/api/claims", user);
   }
 
 
@@ -66,7 +66,19 @@ export class DataService {
    * @param:userId
    */
   getAllClamis = (userId: number) => {
-    return this._http.get(`http://13.233.128.233:9999/insurance-claim-system/api/users/${userId}/claims`)
+    return this._http.get(`http://10.117.189.90:9090/insurance-claim-system/api/users/${userId}/claims`)
+  }
+
+  /**
+   * Approve claimed application
+   */
+  approveClaim = (userId: number, obj: object) => {
+    return this._http.put(`http://10.117.189.162:9090/insurance-claim-system/api/users/${userId}/claims`, obj)
+  }
+
+
+  rejectClaim = (userId: number, obj: object) => {
+    return this._http.put(`http://10.117.189.162:9090/insurance-claim-system/api/users/${userId}/claims`, obj)
   }
 
 
