@@ -34,7 +34,7 @@ pipeline {
 
                 sh '''
 
-                cd /var/lib/jenkins/workspace/ProjIng/dist
+                cd /var/lib/jenkins/workspace/Insurence_frontend_pipeline/dist
 
                 chmod -R 777 ProjIng
 
